@@ -5,6 +5,10 @@ SUBNET=""           #netwrok subnet of NAS
 NAS=""              #host address for NAS Sever
 PLEX=""             #host address for PLEX Server
 
+#Flags for optionally installing required sections
+iNAS=true
+iPLEX=true
+
 MOUNTPOINT="/mnt"  #every Linux machine will have this
 FOLDERS=("test" "new")   #array for folder names
 
