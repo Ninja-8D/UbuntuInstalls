@@ -19,16 +19,16 @@ if [$SUBNET -z ] ; then
     echo "Enter your subnet. Example: 192.168.0"
     read SUBNET ; fi
 
-if [$NAS -z ] ; then
+if [$NAS -z ] && $iNAS; then
     echo "Enter host address for the NAS server.  Example 100" 
     read NAS ; fi
 
-if [$PLEX -z ]  ; then
+if [$PLEX -z ] && $iPLEX  ; then
     echo "Enter host address for the PLEX server.  Example 100"
     read PLEX ; fi
 
 #NFS Mount point
-if [$MOUNTPOINT -z ] ; then
+if [$MOUNTPOINT -z ] && $iNAS ; then
     echo "Enter the mount point for the NFS folders.  Example /mnt."
     read MOUNTPOINT ; fi
 
@@ -36,28 +36,31 @@ if [$MOUNTPOINT -z ] ; then
 
 echo " ==================== Creating NFS folders  ========================"
 echo $MOUNTPOINT && cd $MOUNTPOINT
+if $iNAS ; then
+    if [ ${#FOLDERS[@]} -gt 0 ] ; then
+        for f in ${FOLDERS[@]}; do
+            mkdir $f ; done
+    else 
+        echo "FOLDERS variable is empty" ; fi
+        
+    #install the NFS package needed for the client side 
+    echo " ==================== NFS  ========================"
+    sudo apt install nfs-kernel-server -y
+    sudo apt install nfs-common -y
 
-if [ ${#FOLDERS[@]} -gt 0 ] ; then
-    for f in ${FOLDERS[@]}; do
-        mkdir $f ; done
-else 
-    echo "FOLDERS variable is empty" ; fi
+    #check install and displays folders from NFS server
+    sudo showmount  -e $SUBNET"."$NAS
+
+    #edit files for mounting.
+    sudo $EDITOR /etc/hosts  #set host for NAS before the fstab.  
+
+    sudo $EDITOR /etc/fstab  #Use the NAS host in the FSTAB
+    sudo showmount -a
+    sudo systemctl daemon-reload
+fi
 
 
-#install the NFS package needed for the client side 
-echo " ==================== NFS  ========================"
-sudo apt install nfs-kernel-server -y
-sudo apt install nfs-common -y
 
-#check install and displays folders from NFS server
-sudo showmount  -e $SUBNET"."$NAS
-
-#edit files for mounting.
-sudo $EDITOR /etc/hosts  #set host for NAS before the fstab.  
-
-sudo $EDITOR /etc/fstab  #Use the NAS host in the FSTAB
-sudo showmount -a
-sudo systemctl daemon-reload
 
 
 
