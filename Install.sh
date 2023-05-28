@@ -1,4 +1,4 @@
-FILE=./InstallVars.sh  #file that will override Variables for different computers
+FILE=./InstallVars.sh  #file that will overwrite Variables for different computers. You can keep a copy for each computer in your house and reuse this script.
 EDITOR=gedit  #Editor to be used for editting files
 
 #============================ NAS and network variables =====================================
