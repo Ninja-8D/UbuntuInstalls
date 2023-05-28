@@ -1,5 +1,6 @@
 FILE=./InstallVars.sh  #file that will override Variables for different computers
 
+#============================ NAS and network variables =====================================
 #bash for install NFS and other apps.  Ubuntu 23.04 based distros
 SUBNET=""           #netwrok subnet of NAS
 NAS=""              #host address for NAS Sever
@@ -14,8 +15,16 @@ FOLDERS=("test" "new")   #array for folder names
 
 EDITOR=gedit  #Editor to be used for editting files
 
+#============================ Programming Apps variables =====================================
+#Some extensions don't work with the linux version of CODE
+iVSCODE=false
+VSCODE="https://packages.microsoft.com/repos/vscode/pool/main/c/code/"  #URL where the VS Code files are
+fVSCODE=curl $VSCODE | grep -o -E 'code.+deb\"' | tail -1  #GREP the last/latest deb file
+
+
+#============================ File to called to overwrite variables for individual machines =====================================
 if test -f "$FILE"; then  #check if file exists
-    source $FILE ; fi
+    source $FILE ; fi  #run the other files
 
 echo " ==================== Getting NFS Network and Folders variables  ========================"
 #Network section.  Fill in the values 
