@@ -72,7 +72,7 @@ if $iNAS ; then
 
     sudo $EDITOR /etc/fstab  #Use the NAS host in the FSTAB
     sudo showmount -a
-    sudo systemctl restart daemon-reload
+    #sudo systemctl restart daemon-reload  
 fi  #$iNAS
 
 echo " ==================== DONE  ========================"
