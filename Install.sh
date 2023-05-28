@@ -19,7 +19,8 @@ EDITOR=gedit  #Editor to be used for editting files
 #Some extensions don't work with the linux version of CODE
 iVSCODE=false
 VSCODE="https://packages.microsoft.com/repos/vscode/pool/main/c/code/"  #URL where the VS Code files are
-fVSCODE=curl $VSCODE | grep -o -E 'code.+deb\"' | tail -1  #GREP the last/latest deb file
+ffVSCODE=curl $VSCODE | grep -o -E 'code.+deb\"' | tail -1  #GREP the last/latest deb file. There is an extra "
+fVSCODE=${ffVSCODE::-1} #remove the last character
 
 
 #============================ File to called to overwrite variables for individual machines =====================================
