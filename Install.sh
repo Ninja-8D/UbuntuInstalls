@@ -26,7 +26,7 @@ fVSCODE=${ffVSCODE::-1} #remove the last character
 
 #============================ File to called to overwrite variables for individual machines =====================================
 if test -f "$FILE"; then  #check if file exists
-    echo "Opening $FILE"
+    echo "====================== Opening $FILE ========================"
     source $FILE ; fi  #run the other files
 
 echo " ==================== Getting NFS Network and Folders variables  ========================"
