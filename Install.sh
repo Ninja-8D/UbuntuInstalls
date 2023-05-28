@@ -1,4 +1,5 @@
 FILE=./InstallVars.sh  #file that will override Variables for different computers
+EDITOR=gedit  #Editor to be used for editting files
 
 #============================ NAS and network variables =====================================
 #bash for install NFS and other apps.  Ubuntu 23.04 based distros
