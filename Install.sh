@@ -16,7 +16,7 @@ FOLDERS=("test" "new")   #array for folder names
 
 EDITOR=gedit  #Editor to be used for editting files
 
-iVSCODE=false #not Ready.  Files downloaded is not a debian structure file.
+iVSCODE=false #not Ready.  Files downloaded is not a debian structure file.  TODO:  Need to chown the VsCodeDeb file to not root.
 
 #============================ Programming Apps variables =====================================
 #Some extensions don't work with the linux version of CODE
