@@ -16,24 +16,18 @@ FOLDERS=("test" "new")   #array for folder names
 
 EDITOR=gedit  #Editor to be used for editting files
 
-iVSCODE=false #not Ready.  Files downloaded is not a debian structure file.  TODO:  Need to chown the VsCodeDeb file to not root.
-
-#============================ Programming Apps variables =====================================
-#Some extensions don't work with the linux version of CODE
-if $iVSCODE; then
-    VSCODE=https://packages.microsoft.com/repos/vscode/pool/main/c/code/  #URL where the VS Code files are
-    ffVSCODE=$(curl $VSCODE | grep -o -E 'code.+deb\"' | tail -1)  #GREP the last/latest deb file. There is an extra "
-    fVSCODE=${ffVSCODE::-1} #remove the last character
-    cd ~
-    wget $VSCODE$fVCODE  
-    fi
-
+#==================== VSCODE ==========================
+iVSCODE=true #not Ready.  Files downloaded is not a debian structure file.  TODO:  Need to chown the VsCodeDeb file to not root.
+VsCodeDeb="VsCode.deb"
+VsCodeUrl="https://az764295.vo.msecnd.net/stable/b3e4e68a0bc097f0ae7907b217c1119af9e03435/code_1.78.2-1683731010_amd64.deb"  
 
 #============================ File to called to overwrite variables for individual machines =====================================
 if test -f "$FILE"; then  #check if file exists
     echo "====================== Opening $FILE ========================"
     source $FILE 
     fi  #run the other files
+
+
 
 echo " ==================== Getting NFS Network and Folders variables  ========================"
 #Network section.  Fill in the values 
@@ -85,6 +79,21 @@ if $iNAS ; then
     sudo showmount -a
     #sudo systemctl restart daemon-reload  
     fi  #$iNAS
+    
+    
 
+#============================ Programming Apps variables =====================================
+#Some extensions don't work with the linux version of CODE
+if $iVsCode; then
+    #tried to use grep and get a latest version but the file didn't work
+    VsCode=https://packages.microsoft.com/repos/vscode/pool/main/c/code/  #URL where the VS Code files are
+    VsCodeCurl=$(curl $VsCode | grep -o -E 'code.+deb\"' | tail -1)  #GREP the last/latest deb file. There is an extra "
+    VsCodeMatch=${VsCodeCurl::-1} #remove the last character
+    
+    echo -e "\n========== URL: "$VsCodeMatch" ======================\n"
+    echo -e "\n========== URL: "$VsCodeUrl" ======================\n"
+    wget -O $VsCodeDeb $VsCodeUrl && sudo dpkg -i $VsCodeDeb
+    fi
+    
 echo " ==================== DONE  ========================"
 
