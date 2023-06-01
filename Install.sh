@@ -16,7 +16,7 @@ FOLDERS=("test" "new")   #array for folder names
 
 EDITOR=gedit  #Editor to be used for editting files
 
-iVSCODE=true
+iVSCODE=false #not Ready.  Files downloaded is not a debian structure file.
 
 #============================ Programming Apps variables =====================================
 #Some extensions don't work with the linux version of CODE
@@ -25,7 +25,7 @@ if $iVSCODE; then
     ffVSCODE=$(curl $VSCODE | grep -o -E 'code.+deb\"' | tail -1)  #GREP the last/latest deb file. There is an extra "
     fVSCODE=${ffVSCODE::-1} #remove the last character
     cd ~
-    wget $VSCODE"/"$fVCODE  
+    wget $VSCODE$fVCODE  
     fi
 
 
