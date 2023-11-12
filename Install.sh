@@ -84,10 +84,11 @@ if $iNas ; then
 #============================ Programming Apps variables =====================================
 #Some extensions don't work with the linux version of CODE
 if $iVsCode; then
+    cd ~/home/Downloads
     #tried to use grep and get a latest version but the file didn't work
-    VsCode=https://packages.microsoft.com/repos/vscode/pool/main/c/code/  #URL where the VS Code files are
-    VsCodeCurl=$(curl $VsCode | grep -o -E 'code.+deb\"' | tail -1)  #GREP the last/latest deb file. There is an extra "
-    VsCodeMatch=${VsCodeCurl::-1} #remove the last character
+    #VsCode=https://packages.microsoft.com/repos/vscode/pool/main/c/code/  #URL where the VS Code files are
+    #VsCodeCurl=$(curl $VsCode | grep -o -E 'code.+deb\"' | tail -1)  #GREP the last/latest deb file. There is an extra "
+    #VsCodeMatch=${VsCodeCurl::-1} #remove the last character
     
     #echo -e "\n========== URL: "$VsCodeMatch" ======================\n"
     echo -e "\n========== URL: "$VsCodeUrl" ======================\n"
