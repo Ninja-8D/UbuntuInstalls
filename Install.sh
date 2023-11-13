@@ -1,6 +1,8 @@
 FILE=./InstallVars.sh  #file that will overwrite Variables for different computers. You can keep a copy for each computer in your house and reuse this script.
 EDITOR=gedit  #Editor to be used for editting files
 
+#sudo su -c "echo '#testing append with echo' >> /etc/fstab"
+
 #============================ Nas and network variables =====================================
 #bash for install NFS and other apps.  Ubuntu 23.04 based distros
 SubNet=""           #netwrok SubNet of Nas
