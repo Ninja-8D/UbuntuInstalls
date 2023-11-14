@@ -31,11 +31,10 @@ if test -f "$FILE"; then  #check if file exists
     fi  #run the other files
 
 
+echo "====================== Install Linux tools/utilities  ========================"
 if $iCurl ; then 
-    sudo apt install curl
+    sudo apt install curl -y
     fi
-
-
    
 if $iGnomeExt ; then
    echo "sudo apt install gnome-shell-extension-manager"
@@ -110,9 +109,11 @@ if $iVsCode; then
     wget -O $VsCodeDeb $VsCodeUrl && sudo dpkg -i $VsCodeDeb
     fi
     
-echo " ==================== DONE  ========================"
 
 
 if $iBun; then 
-    sudo apt install curl && curl -fsSL https://bun.sh/install | bash
+    sudo apt install curl -y && curl -fsSL https://bun.sh/install | bash
     fi
+
+
+echo " ==================== DONE  ========================"
