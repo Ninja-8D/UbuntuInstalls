@@ -12,8 +12,9 @@ Plex=""             #host address for Plex Server
 #Flags for optionally installing required sections
 iNas=true
 iPlex=true
+iGnomeExt=true
 
-MountPoint="/mnt"  #every Linux machine will have this
+MountPoint="/media"  #every Linux machine will have this
 Folders=("test" "new")   #array for folder names
 
 
@@ -30,6 +31,12 @@ if test -f "$FILE"; then  #check if file exists
 
 
 
+if $iGnomeExt ; then
+   echo "sudo apt install gnome-shell-extension-manager"
+   fi
+
+
+   
 echo " ==================== Getting NFS Network and Folders variables  ========================"
 #Network section.  Fill in the values 
 if [$SubNet -z ] ; then
