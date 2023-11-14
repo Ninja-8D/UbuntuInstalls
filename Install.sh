@@ -12,9 +12,10 @@ Plex=""             #host address for Plex Server
 #Flags for optionally installing required sections
 iNas=true
 iPlex=true
+iUnzip=true
 iGnomeExt=true
-iBun=true
 iCurl=true
+iBun=true
 
 MountPoint="/media"  #every Linux machine will have this
 Folders=("test" "new")   #array for folder names
@@ -32,6 +33,10 @@ if test -f "$FILE"; then  #check if file exists
 
 
 echo "====================== Install Linux tools/utilities  ========================"
+if $iUnzip ; then
+    sudo apt install unzip -y
+    fi
+    
 if $iCurl ; then 
     sudo apt install curl -y
     fi
