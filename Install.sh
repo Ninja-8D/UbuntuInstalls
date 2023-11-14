@@ -20,7 +20,7 @@ Folders=("test" "new")   #array for folder names
 #==================== VSCODE ==========================
 iVSCODE=true #not Ready.  Files downloaded is not a debian structure file.  TODO:  Need to chown the VsCodeDeb file to not root.
 VsCodeDeb="VsCode.deb"
-VsCodeUrl="https://az764295.vo.msecnd.net/stable/b3e4e68a0bc097f0ae7907b217c1119af9e03435/code_1.78.2-1683731010_amd64.deb"  
+VsCodeUrl="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"  
 
 #============================ File to called to overwrite variables for individual machines =====================================
 if test -f "$FILE"; then  #check if file exists
