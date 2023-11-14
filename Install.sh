@@ -13,6 +13,8 @@ Plex=""             #host address for Plex Server
 iNas=true
 iPlex=true
 iGnomeExt=true
+iBun=true
+iCurl=true
 
 MountPoint="/media"  #every Linux machine will have this
 Folders=("test" "new")   #array for folder names
@@ -29,7 +31,12 @@ if test -f "$FILE"; then  #check if file exists
     fi  #run the other files
 
 
+if $iCurl ; then 
+    sudo apt install curl
+    fi
 
+
+   
 if $iGnomeExt ; then
    echo "sudo apt install gnome-shell-extension-manager"
    fi
@@ -104,3 +111,8 @@ if $iVsCode; then
     fi
     
 echo " ==================== DONE  ========================"
+
+
+if $iBun; then 
+    sudo apt install curl && curl -fsSL https://bun.sh/install | bash
+    fi
