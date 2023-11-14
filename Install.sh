@@ -74,7 +74,7 @@ if [$MountPoint -z ] && $iNas ; then
 
 echo " ==================== Creating NFS Folders  ========================"
 echo $MountPoint && cd $MountPoint
-if $iNas && $Nas; then && $SubNet
+if $iNas && [-n "$Nas"] && [-n "$SubNet"]; then 
     sudo su -c "echo $SubNet'.'$Nas' nas' >> /etc/hosts"  #setup hosts
     
 if $iNas ; then
