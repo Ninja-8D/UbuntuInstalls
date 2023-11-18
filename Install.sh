@@ -7,6 +7,7 @@ EDITOR=gedit  #Editor to be used for editting files
 #bash for install NFS and other apps.  Ubuntu 23.04 based distros
 SubNet=""           #netwrok SubNet of Nas
 Nas=""              #host address for Nas Sever
+Nfs=""              #if there is a DNS or hosts file entry by name for the NFS is hosted.  If blank the ip will be used by combining the SubNet and Nas
 Plex=""             #host address for Plex Server
 
 #Flags for optionally installing required sections
@@ -18,8 +19,8 @@ iCurl=true
 iBun=true
 
 MountPoint="/media"  #every Linux machine will have this
-Folders=("test" "new")   #array for folder names
-
+Folders=("Folder1" "Folder2" "Folder3")  #array for folder names
+NfsFolders=("NFSFolder1" "NFSFolder2" "NFSFolder3")
 
 #==================== VSCODE ==========================
 iVSCODE=true #not Ready.  Files downloaded is not a debian structure file.  TODO:  Need to chown the VsCodeDeb file to not root.
@@ -31,6 +32,9 @@ if test -f "$FILE"; then  #check if file exists
     source $FILE 
     fi  #run the other files
 
+if [-n $Nfs ] ; then
+    $Nfs = $Subnet"."$Nas
+    fi
 
 echo "====================== Install Linux tools/utilities  ========================"
 if $iUnzip ; then
@@ -100,7 +104,16 @@ if $iNas ; then
     sudo showmount -a
     #sudo systemctl restart daemon-reload  
     fi  #$iNas
+
+    # Get the length of either array (assuming both arrays have the same length)
+    l=${#folders[@]}
     
+    # Iterate through the indices using a for loop
+    for ((i = 0; i < l; i++)); do
+
+        sudo su -c "echo '#${nfsFolders[$i]} {folders[$i]}' >> /etc/fstab"
+        echo "Index $i - NFS Folder: ${nfsFolders[$i]} , Folder: ${folders[$i]} "
+        done
     
 
 #============================ Programming Apps variables =====================================
