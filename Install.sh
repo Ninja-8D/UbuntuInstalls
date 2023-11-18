@@ -111,7 +111,7 @@ if $iNas ; then
     # Iterate through the indices using a for loop
     for ((i = 0; i < l; i++)); do
 
-        sudo su -c "echo '#${nfsFolders[$i]} {folders[$i]}' >> /etc/fstab"
+        sudo su -c "echo '#${nfsFolders[$i]} ${folders[$i]}' >> /etc/fstab"
         echo "Index $i - NFS Folder: ${nfsFolders[$i]} , Folder: ${folders[$i]} "
         done
     
