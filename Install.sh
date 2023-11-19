@@ -105,17 +105,16 @@ if $iNas ; then
     sudo $EDITOR /etc/fstab  #Use the Nas host in the FSTAB
     sudo showmount -a
     sudo systemctl restart daemon-reload  
+
+    Fstab="$NfsHost:$Nfs/"
+    echo $Fstab
+    l=${#Folders[@]}
+    for ((i = 0; i < l; i++)); do
+        sudo su -c "echo '#${Fstab}${NfsFolders[$i]}      ${Folders[$i]}' >> /etc/fstab"
+        echo "Index $i - NFS Folder: ${NfsFolders[$i]} , Folder: ${Folders[$i]}"
+        done
+
     fi  #$iNas
-
-
-    
-Fstab="$NfsHost:$Nfs/"
-echo $Fstab
-l=${#Folders[@]}
-for ((i = 0; i < l; i++)); do
-    sudo su -c "echo '#${Fstab}${NfsFolders[$i]}      ${Folders[$i]}' >> /etc/fstab"
-    echo "Index $i - NFS Folder: ${NfsFolders[$i]} , Folder: ${Folders[$i]} \n"
-    done
 
 
 
