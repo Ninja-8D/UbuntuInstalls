@@ -105,16 +105,14 @@ if $iNas ; then
     #sudo systemctl restart daemon-reload  
     fi  #$iNas
 
-    # Get the length of either array (assuming both arrays have the same length)
-    l=${#folders[@]}
-    
-    # Iterate through the indices using a for loop
-    for ((i = 0; i < l; i++)); do
 
-        sudo su -c "echo '#${nfsFolders[$i]} ${folders[$i]}' >> /etc/fstab"
-        echo "Index $i - NFS Folder: ${nfsFolders[$i]} , Folder: ${folders[$i]} "
-        done
-    
+l=${#Folders[@]}
+for ((i = 0; i < l; i++)); do
+    sudo su -c "echo '#${NfsFolders[$i]} ${Folders[$i]}' >> /etc/fstab"
+    echo "Index $i - NFS Folder: ${NfsFolders[$i]} , Folder: ${Folders[$i]} "
+    done
+
+
 
 #============================ Programming Apps variables =====================================
 #Some extensions don't work with the linux version of CODE
