@@ -75,9 +75,13 @@ if [$MountPoint -z ] && $iNas ; then
 
 
 echo " ==================== Creating NFS Folders  ========================"
+if [$NfsHost -z] ; then
+    NfsHost = $SubNet"."$Nas
+    fi
+    
 echo $MountPoint && cd $MountPoint
 if $iNas && [-n "$Nas"] && [-n "$SubNet"]; then 
-    sudo su -c "echo $SubNet'.'$Nas' nas' >> /etc/hosts"  #setup hosts
+    sudo su -c "echo $NfsHost nas' >> /etc/hosts"  #setup hosts
     
 if $iNas ; then
     if [ ${#Folders[@]} -gt 0 ] ; then
@@ -93,7 +97,7 @@ if $iNas ; then
     sudo apt install nfs-common -y
 
     #check install and displays Folders from NFS server
-    sudo showmount  -e $SubNet"."$Nas
+    sudo showmount  -e $NfsHost
 
     #edit files for mounting.
     sudo $EDITOR /etc/hosts  #set host for Nas before the fstab.  
@@ -104,9 +108,6 @@ if $iNas ; then
     fi  #$iNas
 
 
-if [$NfsHost -z] ; then
-    NfsHost = $SubNet"."$Nas
-    fi
     
 Fstab="$NfsHost:$Nfs/"
 echo $Fstab
