@@ -104,7 +104,7 @@ if $iNas ; then
     fi  #$iNas
 
 
-if [-n $NfsHost] ; then
+if [$NfsHost -z] ; then
     NfsHost = $SubNet"."$Nas
     fi
     
