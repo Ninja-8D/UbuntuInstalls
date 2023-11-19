@@ -104,7 +104,7 @@ if $iNas ; then
 
     sudo $EDITOR /etc/fstab  #Use the Nas host in the FSTAB
     sudo showmount -a
-    #sudo systemctl restart daemon-reload  
+    sudo systemctl restart daemon-reload  
     fi  #$iNas
 
 
