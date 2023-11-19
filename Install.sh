@@ -9,6 +9,7 @@ SubNet=""           #netwrok SubNet of Nas
 Nas=""              #host address for Nas Sever
 Nfs=""              #if there is a DNS or hosts file entry by name for the NFS is hosted.  If blank the ip will be used by combining the SubNet and Nas
 Plex=""             #host address for Plex Server
+NfsHost=""
 
 #Flags for optionally installing required sections
 iNas=true
@@ -32,9 +33,6 @@ if test -f "$FILE"; then  #check if file exists
     source $FILE 
     fi  #run the other files
 
-if [-n $Nfs ] ; then
-    $Nfs = $Subnet"."$Nas
-    fi
 
 echo "====================== Install Linux tools/utilities  ========================"
 if $iUnzip ; then
@@ -106,10 +104,16 @@ if $iNas ; then
     fi  #$iNas
 
 
+if [-n $NfsHost] ; then
+    NfsHost = $SubNet"."$Nas
+    fi
+    
+Fstab="$NfsHost:$Nfs/"
+echo $Fstab
 l=${#Folders[@]}
 for ((i = 0; i < l; i++)); do
-    sudo su -c "echo '#${NfsFolders[$i]} ${Folders[$i]}' >> /etc/fstab"
-    echo "Index $i - NFS Folder: ${NfsFolders[$i]} , Folder: ${Folders[$i]} "
+    sudo su -c "echo '#${Fstab}${NfsFolders[$i]}      ${Folders[$i]}' >> /etc/fstab"
+    echo "Index $i - NFS Folder: ${NfsFolders[$i]} , Folder: ${Folders[$i]} \n"
     done
 
 
